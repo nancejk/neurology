@@ -3,7 +3,6 @@
 //as a boost graph of this sort.
 
 #include <boost/graph/adjacency_list.hpp>	//Defines the adjacency_list
-#include <boost/graph/adjacency_matrix.hpp>	//Defines the adjacency_matrix
 
 //The Neural Net (NNet) namespace in which everything will be defined.
 namespace NNet
@@ -15,8 +14,12 @@ namespace NNet
 		//a neuron in order for it to fire.
 		double threshold;
 		
-		//The value that a neuron adds to the stream.
+		//The value that a neuron above threshold adds to its out-edges.
 		double strength;
+		
+		//A measure of distance from the head nodes.  Each 'tier' is a hop
+		//away from the head.
+		std::size_t tier;
 	};
 	
 	//The connectivity units that connect one Neuron to another.
@@ -24,6 +27,10 @@ namespace NNet
 	{
 		//The value that has currently been carried along the network.
 		double pressure;
+		
+		//A carrying capacity for the conduit.  Signals arriving at the
+		//conduit will saturate at this level.
+		double capacity;
 	};
 
 	typedef boost::adjacency_list<boost::vecS,
@@ -32,8 +39,11 @@ namespace NNet
 								NNet::Neuron,
 								NNet::Conduit> Network;
 
-	//A special iterator for our Networks.
+	//A special iterator for Networks.
 	typedef boost::graph_traits<Network>::vertex_iterator net_walker;
+	
+	//A function that returns a Network object.
+	Network BuildNewNetwork(unsigned numNodes, unsigned minOut, unsigned maxOut);
 }//NNet
 
 
