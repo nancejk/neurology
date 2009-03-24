@@ -1,0 +1,14 @@
+Neurology v0.0 (Jared Nance)
+
+Depends in a big way on the Boost Graph Library available from www.boost.org.
+In order to compile, the compiler needs to know where the boost include directory
+is where the BGL and Random Number Generation facilities sit.  This should be 
+something like
+	/usr/local/include/boost-1_38
+or similar.
+
+Also, angle bracket includes are used, so that -I. needs to be passed to the
+compiler as well.  There is really no good reason for this other than that
+I like the continuity.
+
+Enjoy!
