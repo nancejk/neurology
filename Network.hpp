@@ -33,7 +33,7 @@ namespace NNet
 		double capacity;
 	};
 
-	typedef boost::adjacency_list<boost::vecS,
+	typedef boost::adjacency_list<boost::setS,
 								boost::vecS,
 								boost::bidirectionalS,
 								NNet::Neuron,

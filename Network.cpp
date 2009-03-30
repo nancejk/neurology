@@ -82,6 +82,6 @@ namespace NNet
 				}
 			}
 		}
-		return Network(edge_list.begin(),edge_list.end(),*std::max_element(nodeID.begin(),nodeID.end()) );
+		return Network(edge_list.begin(),edge_list.end(),*std::max_element( nodeID.begin(),nodeID.end() ) );
 	}
 }	//NNet
