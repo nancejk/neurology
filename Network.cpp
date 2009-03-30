@@ -24,7 +24,7 @@ namespace NNet
 		static const std::size_t outCpx(1);
 		
 		//This is a ballpark guess at the size that we want our network to be.
-		static const std::size_t ballpark(5);
+		static const std::size_t ballpark = numNodes;
 		
 		//The boundaries of the layers.  boundaries[i] is the end of the i'th layer.
 		std::vector<unsigned> boundaries(1);
@@ -35,6 +35,7 @@ namespace NNet
 		while ( std::accumulate(boundaries.begin(), boundaries.end(), 0) < ballpark )
 		{
 			boundaries.push_back( boundaries.back() + theRNE.GetUniformRandomInt( minOut*boundaries.back(), maxOut*boundaries.back() ) );
+			std::cout << "New layer with " << boundaries.back() << " nodes created." << std::endl;
 		}
 		
 		//Now push on the output layer.
@@ -81,7 +82,6 @@ namespace NNet
 				}
 			}
 		}
-		
-		return Network(edge_list.begin(),edge_list.end(),std::accumulate(nodeID.begin(),nodeID.end(),0) );
+		return Network(edge_list.begin(),edge_list.end(),*std::max_element(nodeID.begin(),nodeID.end()) );
 	}
 }	//NNet
